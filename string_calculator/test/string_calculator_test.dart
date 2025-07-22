@@ -21,4 +21,8 @@ void main() {
   test('Support custom delimiter with //;\\n syntax', () {
     expect(calculator.add('//;\n1;2'), equals(3));
   });
+    test('Throw exception when negative numbers are passed', () {
+    expect(() => calculator.add('1,-2,3,-5'),
+        throwsA(predicate((e) => e.toString().contains('negative numbers not allowed: -2,-5'))));
+  });
 }
