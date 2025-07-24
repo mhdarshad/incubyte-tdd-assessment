@@ -17,4 +17,6 @@ The following test cases were implemented and passed:
 
 ![All tests passed](string_calculator/test_passed.png)
 
+![All tests passed](string_calculator/test_passed_extended.png)
+
 All tests passed successfully, as shown above. 
