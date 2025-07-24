@@ -10,12 +10,17 @@ class StringCalculator {
 
     if (numbers.startsWith('//')) {
       final split = numbers.split('\n');
-      delimiter = split[0].substring(2);
+      final delimiterPart = split[0].substring(2);
+      if (delimiterPart.startsWith('[') && delimiterPart.endsWith(']')) {
+        delimiter = delimiterPart.substring(1, delimiterPart.length - 1);
+      } else {
+        delimiter = delimiterPart;
+      }
       numPart = split.sublist(1).join('\n');
     }
 
     numPart = numPart.replaceAll('\n', delimiter);
-    final parts = numPart.split(delimiter);
+    final parts = delimiter.isNotEmpty ? numPart.split(delimiter) : [numPart];
     final nums = parts.map(int.parse).where((n) => n <= 1000).toList();
 
     final negatives = nums.where((n) => n < 0).toList();
