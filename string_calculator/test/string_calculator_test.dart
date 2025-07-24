@@ -31,6 +31,11 @@ void main() {
       ),
     );
   });
+  test('Numbers bigger than 1000 should be ignored', () {
+    expect(calculator.add('2,1001'), equals(2));
+    expect(calculator.add('1000,2'), equals(1002));
+    expect(calculator.add('1234,1,1001,3'), equals(4));
+  });
   test('GetCalledCount returns the number of times add() was invoked', () {
     final calc = StringCalculator();
     expect(calc.getCalledCount(), equals(0));

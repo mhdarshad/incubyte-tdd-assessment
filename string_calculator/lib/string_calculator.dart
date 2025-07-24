@@ -16,14 +16,14 @@ class StringCalculator {
 
     numPart = numPart.replaceAll('\n', delimiter);
     final parts = numPart.split(delimiter);
-    final nums = parts.map(int.parse).toList();
+    final nums = parts.map(int.parse).where((n) => n <= 1000).toList();
 
     final negatives = nums.where((n) => n < 0).toList();
     if (negatives.isNotEmpty) {
       throw Exception('negative numbers not allowed: ${negatives.join(",")}');
     }
 
-    return nums.reduce((a, b) => a + b);
+    return nums.isEmpty ? 0 : nums.reduce((a, b) => a + b);
   }
 
   int getCalledCount() {
