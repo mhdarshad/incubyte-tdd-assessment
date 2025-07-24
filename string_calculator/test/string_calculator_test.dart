@@ -31,4 +31,12 @@ void main() {
       ),
     );
   });
+  test('GetCalledCount returns the number of times add() was invoked', () {
+    final calc = StringCalculator();
+    expect(calc.getCalledCount(), equals(0));
+    calc.add('1,2');
+    expect(calc.getCalledCount(), equals(1));
+    calc.add('3');
+    expect(calc.getCalledCount(), equals(2));
+  });
 }
