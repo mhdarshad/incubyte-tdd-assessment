@@ -55,4 +55,9 @@ void main() {
     expect(calculator.add('//[*][%]\n1*2%3'), equals(6));
     expect(calculator.add('//[***][#][%]\n1***2#3%4'), equals(10));
   });
+
+  test('Allow multiple delimiters longer than one char, e.g. //[**][%%]\\n1**2%%3 == 6', () {
+    expect(calculator.add('//[**][%%]\n1**2%%3'), equals(6));
+    expect(calculator.add('//[abc][def]\n4abc5def6'), equals(15));
+  });
 }
