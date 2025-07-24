@@ -50,4 +50,9 @@ void main() {
     expect(calculator.add('//[***]\n1***2***3'), equals(6));
     // expect(calculator.add('//[abc]\n4abc5abc6'), equals(15));
   });
+
+  test('Allow multiple delimiters of any length with //[delim1][delim2]\\n format', () {
+    expect(calculator.add('//[*][%]\n1*2%3'), equals(6));
+    expect(calculator.add('//[***][#][%]\n1***2#3%4'), equals(10));
+  });
 }

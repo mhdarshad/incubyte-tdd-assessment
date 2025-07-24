@@ -7,20 +7,25 @@ class StringCalculator {
 
     String delimiter = ',';
     String numPart = numbers;
+    List<String> delimiters = [','];
 
     if (numbers.startsWith('//')) {
       final split = numbers.split('\n');
       final delimiterPart = split[0].substring(2);
-      if (delimiterPart.startsWith('[') && delimiterPart.endsWith(']')) {
-        delimiter = delimiterPart.substring(1, delimiterPart.length - 1);
+      if (delimiterPart.startsWith('[')) {
+        final regExp = RegExp(r'\[(.*?)\]');
+        delimiters = regExp.allMatches(delimiterPart).map((m) => m.group(1)!).toList();
       } else {
-        delimiter = delimiterPart;
+        delimiters = [delimiterPart];
       }
       numPart = split.sublist(1).join('\n');
     }
 
-    numPart = numPart.replaceAll('\n', delimiter);
-    final parts = delimiter.isNotEmpty ? numPart.split(delimiter) : [numPart];
+    numPart = numPart.replaceAll('\n', delimiters[0]);
+    for (var d in delimiters) {
+      numPart = numPart.replaceAll(d, ',');
+    }
+    final parts = numPart.split(',');
     final nums = parts.map(int.parse).where((n) => n <= 1000).toList();
 
     final negatives = nums.where((n) => n < 0).toList();
